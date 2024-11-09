@@ -99,8 +99,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea60937ec2ebc14f91b9ee878b1035a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  Hp: 0
+  speed: 10
+  Hp: 100
   InvincibilityTime: 0
   achieveClearItem: 0
 --- !u!61 &4539670116804595504
