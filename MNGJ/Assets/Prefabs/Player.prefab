@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4539670116804595504}
   - component: {fileID: 4539670116804595507}
   - component: {fileID: 5287813423125761478}
+  - component: {fileID: 4477651016400476083}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -100,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cea60937ec2ebc14f91b9ee878b1035a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inGameUI: {fileID: 0}
   speed: 9
   Hp: 3
   InvincibilityTime: 2
@@ -172,3 +174,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4477651016400476083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4539670116804595506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f85e4c894b89b4d80e0258b68792b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartObjs: []
+  heartSprites:
+  - {fileID: 21300000, guid: 6e47d8c1b35aadd4387debe6c396c4b3, type: 3}
+  - {fileID: 21300000, guid: f7be8c690088b6c48b5a3c4f7d594836, type: 3}

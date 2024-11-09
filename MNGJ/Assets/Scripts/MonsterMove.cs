@@ -30,6 +30,7 @@ public class MonsterMove : MonoBehaviour
     private int moveType;
     private Vector3 originPosition = Vector3.up;
     private bool followPlayer = false;
+    private Animator monsterAnim;
 
     void Start()
     {
@@ -38,6 +39,7 @@ public class MonsterMove : MonoBehaviour
         agent.updateRotation = false;
         moveType = points.Count;
         this.transform.position = points[curTarget].transform.position;
+        monsterAnim = GetComponent<Animator>();
     }
 
     void Update()
@@ -59,13 +61,15 @@ public class MonsterMove : MonoBehaviour
 
         Vector3 change = targetPosition - transform.position;
          
-        SetDirection(change);
+        UpdateDirection(change);
+
+        UpdateAnimation();
        
         if (!followPlayer)
             ChangeTarget();
     }
 
-    void SetDirection(Vector3 change)
+    void UpdateDirection(Vector3 change)
     {
         if (Mathf.Abs(change.x) > Mathf.Abs(change.y))  // 좌우
         {
@@ -82,6 +86,30 @@ public class MonsterMove : MonoBehaviour
                 direction = Vector2.down;
         }
     }
+
+    void UpdateAnimation()
+    {
+        int h = (int)direction.x;
+        int v = (int)direction.y;
+
+        monsterAnim.SetBool("isFollow", followPlayer);
+
+        if (monsterAnim.GetInteger("hAxisRaw") != h)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetInteger("hAxisRaw", h);
+        }
+        else if (monsterAnim.GetInteger("vAxisRaw") != v)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetInteger("vAxisRaw", v);
+        }
+        else
+        {
+            monsterAnim.SetBool("isChange", false);
+        }
+    }
+
 
     void ChangeTarget()
     {
