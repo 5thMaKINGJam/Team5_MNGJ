@@ -151,7 +151,6 @@ public class Player : MonoBehaviour
         //보물? 클리어 아이템
         else if(other.gameObject.CompareTag("ClearItem")){
             if (Input.GetKeyDown(KeyCode.Space)){
-                Debug.Log("클리어~~!");
                 achieveClearItem=true;
                 speed=0;
                 other.gameObject.SetActive(false);
