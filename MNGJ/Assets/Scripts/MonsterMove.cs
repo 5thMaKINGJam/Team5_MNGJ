@@ -88,8 +88,9 @@ public class MonsterMove : MonoBehaviour
 
     void UpdateAnimation()
     {
-        int h = (int)direction.x;
-        int v = (int)direction.y;
+        Vector3 dir = targetPosition - transform.position;
+        int h = (int)dir.x;
+        int v = (int)dir.y;
 
         monsterAnim.SetBool("isFollow", followPlayer);
 
