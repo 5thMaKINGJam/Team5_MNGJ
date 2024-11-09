@@ -34,7 +34,6 @@ public class MonsterMove : MonoBehaviour
         agent.updateUpAxis = false;
         agent.updateRotation = false;
         moveType = points.Count;
-        this.transform.position = points[curTarget].transform.position;
         monsterAnim = GetComponent<Animator>();
     }
 
@@ -52,6 +51,10 @@ public class MonsterMove : MonoBehaviour
                 originPosition = Vector2.up;
             }
         }
+
+        Vector3 position = transform.position;
+        position.z = 0;
+        transform.position = position;
 
         agent.SetDestination(targetPosition);
 
