@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     float v;
     Rigidbody2D rigid;
 
+    // Player Sprites
+    Animator anim;
+
     //HP 관련 변수
     public int Hp; //최대 3칸
 
@@ -27,6 +30,7 @@ public class Player : MonoBehaviour
         rigid=GetComponent<Rigidbody2D>();        
         collider=GetComponent<Collider2D>();
         spriteRenderer=GetComponent<SpriteRenderer>();
+        anim=GetComponent<Animator>();
     }
 
     void Update()
@@ -51,10 +55,25 @@ public class Player : MonoBehaviour
         bool vUp = Input.GetButtonUp("Vertical");
 
         //십자이동을 위한 플래그
-        if(hDown||vUp)
+        if(hDown)
             isHorizontalMove=true;
-        else if(vDown||hUp)
+        else if(vDown)
             isHorizontalMove=false;
+        else if (hUp||vUp)
+            isHorizontalMove = h!=0;
+            
+        //애니메이션 변수
+        if(anim.GetInteger("hAxisRaw")!=h){
+            anim.SetBool("isChange",true);
+            anim.SetInteger("hAxisRaw",(int)h);
+        }
+        else if(anim.GetInteger("vAxisRaw")!=v){
+            anim.SetBool("isChange",true);
+            anim.SetInteger("vAxisRaw",(int)v);
+        }
+        else{
+            anim.SetBool("isChange",false);
+        }
     }
 
     //이동이 구현되는 함수
