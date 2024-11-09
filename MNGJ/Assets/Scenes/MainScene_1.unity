@@ -5981,7 +5981,6 @@ GameObject:
   m_Component:
   - component: {fileID: 223892774}
   - component: {fileID: 223892776}
-  - component: {fileID: 223892775}
   m_Layer: 5
   m_Name: Hearts
   m_TagString: Untagged
@@ -6012,36 +6011,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &223892775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 223892773}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &223892776
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6169,6 +6138,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4539670116804595505, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
+      propertyPath: inGameUI
+      value: 
+      objectReference: {fileID: 1030677575}
     - target: {fileID: 4539670116804595506, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6278,7 +6251,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4c35d31d0f732bc408137cc9dfaa82aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f7be8c690088b6c48b5a3c4f7d594836, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6323,7 +6296,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 15.0192795, y: 33.54727}
@@ -6595,6 +6568,7 @@ GameObject:
   - component: {fileID: 1030677573}
   - component: {fileID: 1030677572}
   - component: {fileID: 1030677571}
+  - component: {fileID: 1030677575}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6685,6 +6659,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1030677575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1030677570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5f85e4c894b89b4d80e0258b68792b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heartObjs:
+  - {fileID: 1205790058}
+  - {fileID: 1549716685}
+  - {fileID: 636362200}
+  heartSprites:
+  - {fileID: 21300000, guid: 6e47d8c1b35aadd4387debe6c396c4b3, type: 3}
+  - {fileID: 21300000, guid: f7be8c690088b6c48b5a3c4f7d594836, type: 3}
 --- !u!1 &1204922870
 GameObject:
   m_ObjectHideFlags: 0
@@ -6926,7 +6919,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2221f2dfc0c1f814d91dfe0b4b90cb59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e47d8c1b35aadd4387debe6c396c4b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -63876,7 +63869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2221f2dfc0c1f814d91dfe0b4b90cb59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6e47d8c1b35aadd4387debe6c396c4b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
