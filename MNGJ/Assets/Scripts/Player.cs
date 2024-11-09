@@ -114,6 +114,8 @@ public class Player : MonoBehaviour
         // Wait for the specified amount of time
         yield return new WaitForSeconds(1f);
         if (Hp==0){
+            SoundManager.instance.StopBGM();
+            SoundManager.instance.PlayBGM(SoundManager.EBgm.GAMEOVER_BGM);
             SoundManager.instance.PlaySFX(SoundManager.ESfx.GAMEOVER_EFFECT);
             Debug.Log("죽었습니다");
             speed=0; //움직이지 못하도록
@@ -167,6 +169,7 @@ public class Player : MonoBehaviour
         else if(other.gameObject.CompareTag("ClearItem")){
             if (Input.GetKeyDown(KeyCode.Space)){
                StartCoroutine(ClearSound());
+               achieveClearItem=true;
             }
         }
     }
