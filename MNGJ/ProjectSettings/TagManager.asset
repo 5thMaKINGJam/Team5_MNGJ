@@ -11,6 +11,7 @@ TagManager:
   - Obstacle
   - Path
   - Boundary
+  - Bullet
   layers:
   - Default
   - TransparentFX
