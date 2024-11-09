@@ -14,6 +14,10 @@ public class MonsterRotate : MonoBehaviour
         Vector3 change = targetPosition - transform.position;
 
         ChangeRotation(change);
+
+        Vector3 position = transform.position;
+        position.z = 1;
+        transform.position = position;
     }
 
     void ChangeRotation(Vector3 change)

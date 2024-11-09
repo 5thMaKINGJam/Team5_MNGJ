@@ -7,6 +7,9 @@ public class MonsterAttack : MonoBehaviour
     [SerializeField]
     private GameObject bulletObj;
 
+    [SerializeField]
+    private GameObject sight;
+
     [SerializeField] private int force;
     [SerializeField] private float maxDelay;
 
@@ -16,6 +19,10 @@ public class MonsterAttack : MonoBehaviour
     {
         Attack();
         Reload();
+
+        Vector3 position = transform.position;
+        position.z = 1;
+        transform.position = position;
     }
 
     void Attack()
@@ -27,15 +34,8 @@ public class MonsterAttack : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletObj, transform.position, transform.rotation);
         Rigidbody2D rigid = bullet.GetComponent<Rigidbody2D>();
-
-        Vector2 direction = GetComponentInParent<MonsterMove>().direction;
-
-        rigid.AddForce(direction * 10, ForceMode2D.Impulse);
-
-        if (direction == Vector2.left)
-        {
-            bullet.GetComponent<SpriteRenderer>().flipY = true;
-        }
+        Vector3 dirVec = sight.transform.position - this.transform.position;
+        rigid.AddForce(dirVec.normalized * 10, ForceMode2D.Impulse);
 
         curDelay = 0;
     }
