@@ -24,16 +24,18 @@ public class CameraController: MonoBehaviour
     }
 
     void ClampCameraToBounds()
-    {
-        Camera cam = Camera.main;
+{
+    Camera cam = Camera.main;
 
-        float distanceFromTarget = Mathf.Abs(transform.position.z);
-        float frustumHeight = 2.0f * distanceFromTarget * Mathf.Tan(cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
-        float frustumWidth = frustumHeight * cam.aspect;
+    // Orthographic Size를 사용하여 화면 높이와 너비 계산
+    float frustumHeight = cam.orthographicSize * 2;
+    float frustumWidth = frustumHeight * cam.aspect;
 
-        float clampedX = Mathf.Clamp(transform.position.x, minBound.x + frustumWidth / 2, maxBound.x - frustumWidth / 2);
-        float clampedY = Mathf.Clamp(transform.position.y, minBound.y + frustumHeight / 2, maxBound.y - frustumHeight / 2);
+    float clampedX = Mathf.Clamp(transform.position.x, minBound.x + frustumWidth / 2, maxBound.x - frustumWidth / 2);
+    float clampedY = Mathf.Clamp(transform.position.y, minBound.y + frustumHeight / 2, maxBound.y - frustumHeight / 2);
 
-        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
-    }
+    // 카메라의 Z 위치를 -10으로 고정
+    transform.position = new Vector3(clampedX, clampedY, -10f);
+}
+
 }
