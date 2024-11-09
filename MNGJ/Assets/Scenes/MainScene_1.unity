@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 170925772}
   - component: {fileID: 170925771}
   - component: {fileID: 170925770}
+  - component: {fileID: 170925774}
   m_Layer: 6
   m_Name: Boundary
   m_TagString: Untagged
@@ -6055,6 +6056,22 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &170925774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170925768}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &223892773
 GameObject:
   m_ObjectHideFlags: 0
@@ -6275,6 +6292,14 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7154479450727809441, guid: ebeaec253c68d124d8f99a9e86998ef7, type: 3}
+      propertyPath: m_Size.y
+      value: 0.1795792
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154479450727809441, guid: ebeaec253c68d124d8f99a9e86998ef7, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.20942882
+      objectReference: {fileID: 0}
+    - target: {fileID: 7154479450727809441, guid: ebeaec253c68d124d8f99a9e86998ef7, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -6397,11 +6422,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4539670116804595503, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.6
+      value: 2.01
       objectReference: {fileID: 0}
     - target: {fileID: 4539670116804595503, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 18.7
+      value: 2.89
       objectReference: {fileID: 0}
     - target: {fileID: 4539670116804595503, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6433,6 +6458,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4539670116804595503, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4539670116804595504, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4539670116804595505, guid: f80bdf0d88bdbfe4b8d2d9cb93779406, type: 3}
@@ -7261,7 +7290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1204922871
 Transform:
   m_ObjectHideFlags: 0
@@ -7270,7 +7299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204922870}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.7, y: -9.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7528,7 +7557,6 @@ GameObject:
   - component: {fileID: 1360386713}
   - component: {fileID: 1360386715}
   - component: {fileID: 1360386714}
-  - component: {fileID: 1360386716}
   m_Layer: 3
   m_Name: Background
   m_TagString: Background
@@ -53384,22 +53412,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!114 &1360386716
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1360386712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_OverrideArea: 0
-  m_Area: 0
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
 --- !u!1 &1395976269
 GameObject:
   m_ObjectHideFlags: 0
@@ -64744,7 +64756,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724290837}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.46572903, y: 0.55925274, z: -0.08798257}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64792,8 +64804,8 @@ MonoBehaviour:
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_OverrideVoxelSize: 1
+  m_VoxelSize: 0.1
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
   m_NavMeshData: {fileID: 23800000, guid: ee82723b8ec8bbb47aafa9696959a822, type: 2}
