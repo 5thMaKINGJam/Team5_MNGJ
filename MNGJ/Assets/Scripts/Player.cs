@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private InGameUI inGameUI;
+
     //이동을 위한 변수들
     public float speed;
     bool isHorizontalMove;
@@ -19,7 +22,6 @@ public class Player : MonoBehaviour
     public int Hp; //최대 3칸
 
     //상호작용 관련 변수
-    Collider2D collider;
     public int InvincibilityTime; //무적 시간
     bool isInvulnerable = false; //플래그
     public bool achieveClearItem =false; //클리어 아이템 얻었니?
@@ -27,10 +29,10 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        rigid=GetComponent<Rigidbody2D>();        
-        collider=GetComponent<Collider2D>();
+        rigid=GetComponent<Rigidbody2D>();
         spriteRenderer=GetComponent<SpriteRenderer>();
         anim=GetComponent<Animator>();
+        inGameUI.DrawHearts(Hp);
     }
 
     void Update()
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
     void GetHp(){
         if(Hp<3){
             Hp++;
+            inGameUI.DrawHearts(Hp);
             Debug.Log("체력 회복해용");
         }
     }
@@ -98,7 +101,8 @@ public class Player : MonoBehaviour
     //체력 감소
     void LoseHp(){
         Hp--;
-        if(Hp==0){
+        inGameUI.DrawHearts(Hp);
+        if (Hp==0){
             Debug.Log("죽었습니다");
             speed=0; //움직이지 못하도록
         }
