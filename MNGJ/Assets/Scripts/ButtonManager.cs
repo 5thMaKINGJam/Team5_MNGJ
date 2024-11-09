@@ -8,7 +8,10 @@ public class ButtonManager : MonoBehaviour
     {
         switch (buttonName)
         {
-            
+            case "BackToStart":
+                SceneManager.LoadScene("Start");
+                break;
+                
             case "Restart":
                 Debug.Log("게임 오버");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
