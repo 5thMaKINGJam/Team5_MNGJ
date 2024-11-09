@@ -19,7 +19,7 @@ public class ButtonManager : MonoBehaviour
 
             case "GoSpring":
                 Debug.Log("봄 스테이지로");
-                //선택화면으로 이동하기
+                SceneManager.LoadScene("Map_1");
                 break;
 
 
