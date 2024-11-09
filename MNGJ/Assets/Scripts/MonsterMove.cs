@@ -91,8 +91,11 @@ public class MonsterMove : MonoBehaviour
         int h = (int)direction.x;
         int v = (int)direction.y;
 
-        monsterAnim.SetBool("isFollow", followPlayer);
-
+        if (monsterAnim.GetBool("isFollow") != followPlayer)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetBool("isFollow", followPlayer);
+        }
         if (monsterAnim.GetInteger("hAxisRaw") != h)
         {
             monsterAnim.SetBool("isChange", true);
