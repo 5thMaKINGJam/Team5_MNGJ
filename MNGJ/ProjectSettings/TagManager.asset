@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Monster
+  - Potion
+  - ClearItem
+  tags:
   - Obstacle
   - Path
   - Background
