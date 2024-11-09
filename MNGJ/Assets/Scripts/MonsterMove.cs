@@ -53,7 +53,7 @@ public class MonsterMove : MonoBehaviour
         }
 
         Vector3 position = transform.position;
-        position.z = 0;
+        position.z = 1;
         transform.position = position;
 
         agent.SetDestination(targetPosition);
