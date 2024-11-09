@@ -6,10 +6,6 @@ using UnityEngine.AI;
 public class MonsterMove : MonoBehaviour
 {
     NavMeshAgent agent;
-    private Transform target;
-
-    [SerializeField]
-    private Transform monsterTransform;
 
     [SerializeField]
     private List<GameObject> points;
@@ -28,7 +24,7 @@ public class MonsterMove : MonoBehaviour
 
     private int curTarget = 0;
     private int moveType;
-    private Vector3 originPosition = Vector3.up;
+    private Vector2 originPosition = Vector2.up;
     private bool followPlayer = false;
     private Animator monsterAnim;
 
@@ -51,15 +47,15 @@ public class MonsterMove : MonoBehaviour
         {
             targetPosition = points[curTarget].transform.position;
 
-            if (originPosition != Vector3.up && Vector3.Distance(transform.position, originPosition) <= 0.1f)
+            if (originPosition != Vector2.up && Vector2.Distance(transform.position, originPosition) <= 0.1f)
             {
-                originPosition = Vector3.up;
+                originPosition = Vector2.up;
             }
         }
 
         agent.SetDestination(targetPosition);
 
-        Vector3 change = targetPosition - transform.position;
+        Vector2 change = targetPosition - transform.position;
          
         UpdateDirection(change);
 
@@ -69,7 +65,7 @@ public class MonsterMove : MonoBehaviour
             ChangeTarget();
     }
 
-    void UpdateDirection(Vector3 change)
+    void UpdateDirection(Vector2 change)
     {
         if (Mathf.Abs(change.x) > Mathf.Abs(change.y))  // 좌우
         {
