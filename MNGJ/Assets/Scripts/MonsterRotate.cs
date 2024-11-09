@@ -7,7 +7,6 @@ public class MonsterRotate : MonoBehaviour
     [SerializeField]
     private GameObject monster;
 
-
     void Update()
     {
         Vector3 targetPosition = monster.GetComponent<MonsterMove>().targetPosition;
