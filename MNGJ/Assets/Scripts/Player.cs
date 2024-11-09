@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     float v;
     Rigidbody2D rigid;
 
+    // Player Sprites
+
+
     //HP 관련 변수
     public int Hp; //최대 3칸
 
