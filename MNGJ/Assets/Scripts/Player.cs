@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
+    private InGameUI inGameUI;
+
     //이동을 위한 변수들
     public float speed;
     bool isHorizontalMove;
@@ -19,7 +22,6 @@ public class Player : MonoBehaviour
     public int Hp; //최대 3칸
 
     //상호작용 관련 변수
-    Collider2D collider;
     public int InvincibilityTime; //무적 시간
     bool isInvulnerable = false; //플래그
     public bool achieveClearItem =false; //클리어 아이템 얻었니?
@@ -27,10 +29,10 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        rigid=GetComponent<Rigidbody2D>();        
-        collider=GetComponent<Collider2D>();
+        rigid=GetComponent<Rigidbody2D>();
         spriteRenderer=GetComponent<SpriteRenderer>();
         anim=GetComponent<Animator>();
+        inGameUI.DrawHearts(Hp);
     }
 
     void Update()
@@ -91,6 +93,8 @@ public class Player : MonoBehaviour
     void GetHp(){
         if(Hp<3){
             Hp++;
+            SoundManager.instance.PlaySFX(SoundManager.ESfx.ITEM_EFFECT);
+            inGameUI.DrawHearts(Hp);
             Debug.Log("체력 회복해용");
         }
     }
@@ -98,12 +102,25 @@ public class Player : MonoBehaviour
     //체력 감소
     void LoseHp(){
         Hp--;
-        if(Hp==0){
+        inGameUI.DrawHearts(Hp);
+        // Start the damage delay Coroutine
+       StartCoroutine(DamageSound());       
+    }
+
+     // 죽었을 때 효과음이 겹치지 않도록
+   private IEnumerator DamageSound()
+   {
+        SoundManager.instance.PlaySFX(SoundManager.ESfx.DAMAGE_EFFECT);
+        // Wait for the specified amount of time
+        yield return new WaitForSeconds(1f);
+        if (Hp==0){
+            SoundManager.instance.StopBGM();
+            SoundManager.instance.PlayBGM(SoundManager.EBgm.GAMEOVER_BGM);
+            SoundManager.instance.PlaySFX(SoundManager.ESfx.GAMEOVER_EFFECT);
             Debug.Log("죽었습니다");
             speed=0; //움직이지 못하도록
         }
-            
-    }
+   }
     
     //무적시간
      public void OnDamage()
@@ -151,12 +168,19 @@ public class Player : MonoBehaviour
         //보물? 클리어 아이템
         else if(other.gameObject.CompareTag("ClearItem")){
             if (Input.GetKeyDown(KeyCode.Space)){
-                Debug.Log("클리어~~!");
-                achieveClearItem=true;
-                speed=0;
-                other.gameObject.SetActive(false);
+               StartCoroutine(ClearSound());
+               achieveClearItem=true;
             }
         }
     }
 
+         //보상 얻을 때 효과음 겹치지 않도록
+    private IEnumerator ClearSound()
+   {
+        SoundManager.instance.PlaySFX(SoundManager.ESfx.TREASURE_EFFECT);
+        // Wait for the specified amount of time
+        yield return new WaitForSeconds(4f);
+        SoundManager.instance.PlaySFX(SoundManager.ESfx.CLEAR_EFFECT);
+        speed=0; //움직이지 못하도록
+        }
 }

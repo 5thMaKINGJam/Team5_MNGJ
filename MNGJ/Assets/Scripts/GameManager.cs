@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
             {
                 isClear[i] = false;
             }
+            isClear[0]=true;
         }
     }
 

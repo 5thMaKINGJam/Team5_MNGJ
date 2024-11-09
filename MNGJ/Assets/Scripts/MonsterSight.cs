@@ -9,11 +9,16 @@ public class MonsterSight : MonoBehaviour
     public bool followPlayer;
     private float curFollowTime = 0.0f;
     private MonsterMove monsterMove;
+    bool soundFlag=true;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
+            if(soundFlag){
+                MakeSound();
+                soundFlag=false;
+            }
             Debug.Log("시야각에 플레이어 들어옴");
             followPlayer = true;
             monsterMove.FollowPlayer();
@@ -37,7 +42,16 @@ public class MonsterSight : MonoBehaviour
                 monsterMove.ReturnToOrigin();
                 curFollowTime = 0;
                 Debug.Log("플레이어 추격 종료, 원래 위치로 돌아감");
+                soundFlag=true;
+                SoundManager.instance.StopBGM();
+                SoundManager.instance.PlayBgmByScene();
             }
         }
+    }
+
+    void MakeSound(){
+        SoundManager.instance.StopBGM();
+            SoundManager.instance.PlayBGM(SoundManager.EBgm.DETECTED_BGM);
+            SoundManager.instance.PlaySFX(SoundManager.ESfx.DETECTED_EFFECT);
     }
 }

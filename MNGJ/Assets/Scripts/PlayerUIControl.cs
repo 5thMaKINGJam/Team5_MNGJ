@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerUIControl : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class PlayerUIControl : MonoBehaviour
     public GameObject HpUI2;
     int Hp;
     bool achieveClearItem;
-    
+    string currentSceneName;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +43,19 @@ public class PlayerUIControl : MonoBehaviour
         gameOverUI.SetActive(true);
     }
 
-    //게임 클리어 유아이 보여주기
+    //게임 클리어 유아이 보여주며 GameManager를 고침
     void ShowClearUI(){
+        currentSceneName = SceneManager.GetActiveScene().name;
+        
+        if(currentSceneName == "Map_1")
+            GameManager.Instance.isClear[0] = true;
+        else if(currentSceneName == "Map_2")
+            GameManager.Instance.isClear[1] = true;
+        else if(currentSceneName == "Map_3")
+            GameManager.Instance.isClear[2] = true;
+        else if(currentSceneName == "Map_4")
+            GameManager.Instance.isClear[3] = true;
+
         ClearUI.SetActive(true);
     }
     

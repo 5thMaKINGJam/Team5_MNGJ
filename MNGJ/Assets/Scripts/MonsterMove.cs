@@ -6,10 +6,6 @@ using UnityEngine.AI;
 public class MonsterMove : MonoBehaviour
 {
     NavMeshAgent agent;
-    private Transform target;
-
-    [SerializeField]
-    private Transform monsterTransform;
 
     [SerializeField]
     private List<GameObject> points;
@@ -28,8 +24,9 @@ public class MonsterMove : MonoBehaviour
 
     private int curTarget = 0;
     private int moveType;
-    private Vector3 originPosition = Vector3.up;
+    private Vector2 originPosition = Vector2.up;
     private bool followPlayer = false;
+    private Animator monsterAnim;
 
     void Start()
     {
@@ -37,7 +34,7 @@ public class MonsterMove : MonoBehaviour
         agent.updateUpAxis = false;
         agent.updateRotation = false;
         moveType = points.Count;
-        this.transform.position = points[curTarget].transform.position;
+        monsterAnim = GetComponent<Animator>();
     }
 
     void Update()
@@ -49,23 +46,29 @@ public class MonsterMove : MonoBehaviour
         {
             targetPosition = points[curTarget].transform.position;
 
-            if (originPosition != Vector3.up && Vector3.Distance(transform.position, originPosition) <= 0.1f)
+            if (originPosition != Vector2.up && Vector2.Distance(transform.position, originPosition) <= 0.1f)
             {
-                originPosition = Vector3.up;
+                originPosition = Vector2.up;
             }
         }
 
+        Vector3 position = transform.position;
+        position.z = 1;
+        transform.position = position;
+
         agent.SetDestination(targetPosition);
 
-        Vector3 change = targetPosition - transform.position;
+        Vector2 change = targetPosition - transform.position;
          
-        SetDirection(change);
+        UpdateDirection(change);
+
+        UpdateAnimation();
        
         if (!followPlayer)
             ChangeTarget();
     }
 
-    void SetDirection(Vector3 change)
+    void UpdateDirection(Vector2 change)
     {
         if (Mathf.Abs(change.x) > Mathf.Abs(change.y))  // 좌우
         {
@@ -82,6 +85,30 @@ public class MonsterMove : MonoBehaviour
                 direction = Vector2.down;
         }
     }
+
+    void UpdateAnimation()
+    {
+        int h = (int)direction.x;
+        int v = (int)direction.y;
+
+        monsterAnim.SetBool("isFollow", followPlayer);
+
+        if (monsterAnim.GetInteger("hAxisRaw") != h)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetInteger("hAxisRaw", h);
+        }
+        else if (monsterAnim.GetInteger("vAxisRaw") != v)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetInteger("vAxisRaw", v);
+        }
+        else
+        {
+            monsterAnim.SetBool("isChange", false);
+        }
+    }
+
 
     void ChangeTarget()
     {
