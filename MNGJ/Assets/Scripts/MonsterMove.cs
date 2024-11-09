@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterMove : MonoBehaviour
 {
+    NavMeshAgent agent;
+    private Transform target;
+
+    [SerializeField]
+    private Transform monsterTransform;
+
     [SerializeField]
     private List<GameObject> points;
 
@@ -26,31 +33,34 @@ public class MonsterMove : MonoBehaviour
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateUpAxis = false;
+        agent.updateRotation = false;
         moveType = points.Count;
         this.transform.position = points[curTarget].transform.position;
     }
 
     void Update()
     {
-        // 원래 위치에 도달하면 플레이어 추격 종료
-        if (followPlayer) {
-            targetPosition = transform.position + new Vector3(direction.x, direction.y, 0) * 10f;
+        if (followPlayer) { // 플레이어 추격
+            targetPosition = player.transform.position;
         }
-        else if (originPosition != Vector3.up && Vector3.Distance(transform.position, originPosition) <= 0.1f)
+        else 
         {
-            originPosition = Vector3.up;
-            targetPosition = points[curTarget].transform.position;
-        }
-        else
             targetPosition = points[curTarget].transform.position;
 
-        this.transform.position
-            = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+            if (originPosition != Vector3.up && Vector3.Distance(transform.position, originPosition) <= 0.1f)
+            {
+                originPosition = Vector3.up;
+            }
+        }
+
+        agent.SetDestination(targetPosition);
 
         Vector3 change = targetPosition - transform.position;
-
+         
         SetDirection(change);
-
+       
         if (!followPlayer)
             ChangeTarget();
     }
@@ -75,7 +85,7 @@ public class MonsterMove : MonoBehaviour
 
     void ChangeTarget()
     {
-        float distance = Vector3.Distance(transform.position, points[curTarget].transform.position);
+        float distance = Vector2.Distance(transform.position, points[curTarget].transform.position);
 
         if (distance <= 0.1f)
         {
@@ -86,10 +96,8 @@ public class MonsterMove : MonoBehaviour
     public void FollowPlayer()
     {
         followPlayer = true;
-        Vector3 playerPosition = player.transform.position;
         originPosition = transform.position;
-
-        targetPosition = transform.position + new Vector3(direction.x, direction.y, 0) * 10f; 
+        targetPosition = player.transform.position;
     }
 
     public void ReturnToOrigin()
