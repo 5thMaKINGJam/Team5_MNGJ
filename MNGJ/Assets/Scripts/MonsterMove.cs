@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterMove : MonoBehaviour
 {
+    NavMeshAgent agent;
+
     [SerializeField]
     private List<GameObject> points;
 
@@ -21,41 +24,51 @@ public class MonsterMove : MonoBehaviour
 
     private int curTarget = 0;
     private int moveType;
-    private Vector3 originPosition = Vector3.up;
+    private Vector2 originPosition = Vector2.up;
     private bool followPlayer = false;
+    private Animator monsterAnim;
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateUpAxis = false;
+        agent.updateRotation = false;
         moveType = points.Count;
-        this.transform.position = points[curTarget].transform.position;
+        monsterAnim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        // 원래 위치에 도달하면 플레이어 추격 종료
-        if (followPlayer) {
-            targetPosition = transform.position + new Vector3(direction.x, direction.y, 0) * 10f;
+        if (followPlayer) { // 플레이어 추격
+            targetPosition = player.transform.position;
         }
-        else if (originPosition != Vector3.up && Vector3.Distance(transform.position, originPosition) <= 0.1f)
+        else 
         {
-            originPosition = Vector3.up;
             targetPosition = points[curTarget].transform.position;
+
+            if (originPosition != Vector2.up && Vector2.Distance(transform.position, originPosition) <= 0.1f)
+            {
+                originPosition = Vector2.up;
+            }
         }
-        else
-            targetPosition = points[curTarget].transform.position;
 
-        this.transform.position
-            = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+        Vector3 position = transform.position;
+        position.z = 0;
+        transform.position = position;
 
-        Vector3 change = targetPosition - transform.position;
+        agent.SetDestination(targetPosition);
 
-        SetDirection(change);
+        Vector2 change = targetPosition - transform.position;
+         
+        UpdateDirection(change);
 
+        UpdateAnimation();
+       
         if (!followPlayer)
             ChangeTarget();
     }
 
-    void SetDirection(Vector3 change)
+    void UpdateDirection(Vector2 change)
     {
         if (Mathf.Abs(change.x) > Mathf.Abs(change.y))  // 좌우
         {
@@ -73,9 +86,33 @@ public class MonsterMove : MonoBehaviour
         }
     }
 
+    void UpdateAnimation()
+    {
+        int h = (int)direction.x;
+        int v = (int)direction.y;
+
+        monsterAnim.SetBool("isFollow", followPlayer);
+
+        if (monsterAnim.GetInteger("hAxisRaw") != h)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetInteger("hAxisRaw", h);
+        }
+        else if (monsterAnim.GetInteger("vAxisRaw") != v)
+        {
+            monsterAnim.SetBool("isChange", true);
+            monsterAnim.SetInteger("vAxisRaw", v);
+        }
+        else
+        {
+            monsterAnim.SetBool("isChange", false);
+        }
+    }
+
+
     void ChangeTarget()
     {
-        float distance = Vector3.Distance(transform.position, points[curTarget].transform.position);
+        float distance = Vector2.Distance(transform.position, points[curTarget].transform.position);
 
         if (distance <= 0.1f)
         {
@@ -86,10 +123,8 @@ public class MonsterMove : MonoBehaviour
     public void FollowPlayer()
     {
         followPlayer = true;
-        Vector3 playerPosition = player.transform.position;
         originPosition = transform.position;
-
-        targetPosition = transform.position + new Vector3(direction.x, direction.y, 0) * 10f; 
+        targetPosition = player.transform.position;
     }
 
     public void ReturnToOrigin()

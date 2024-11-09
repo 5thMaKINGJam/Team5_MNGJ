@@ -8,24 +8,18 @@ public class ButtonManager : MonoBehaviour
     {
         switch (buttonName)
         {
-            case "Start":
-                Debug.Log("게임 시작!");
-                // 게임 시작 로직
+            case "BackToStart":
+                SceneManager.LoadScene("Start");
                 break;
-
+                
             case "Restart":
                 Debug.Log("게임 오버");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 break;
 
-            case "SelectStage":
-                Debug.Log("스테이지 선택 화면으로");
-                //선택화면으로 이동하기
-                break;
-
             case "GoSpring":
                 Debug.Log("봄 스테이지로");
-                //선택화면으로 이동하기
+                SceneManager.LoadScene("Map_1");
                 break;
 
 
