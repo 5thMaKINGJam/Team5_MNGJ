@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartUI : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class StartUI : MonoBehaviour
     {
         switch (buttonName)
         {
-            case "Start":
+            case "SelectStage":
                 Debug.Log("스테이지 선택 화면으로");
-                //선택화면으로 이동하기
+                SceneManager.LoadScene("SelectStage");
                 break;
 
             case "Control":
