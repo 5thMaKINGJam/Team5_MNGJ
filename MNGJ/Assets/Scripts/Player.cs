@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -12,12 +13,13 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
 
     //HP 관련 변수
-    [SerializeField]private int Hp; //최대 3칸
+    public int Hp; //최대 3칸
 
     //상호작용 관련 변수
     Collider2D collider;
     public int InvincibilityTime; //무적 시간
     bool isInvulnerable = false; //플래그
+    public bool achieveClearItem =false; //클리어 아이템 얻었니?
     SpriteRenderer spriteRenderer;
 
     void Awake()
@@ -77,8 +79,11 @@ public class Player : MonoBehaviour
     //체력 감소
     void LoseHp(){
         Hp--;
-        if(Hp==0)
+        if(Hp==0){
             Debug.Log("죽었습니다");
+            speed=0; //움직이지 못하도록
+        }
+            
     }
     
     //무적시간
@@ -128,6 +133,8 @@ public class Player : MonoBehaviour
         else if(other.gameObject.CompareTag("ClearItem")){
             if (Input.GetKeyDown(KeyCode.Space)){
                 Debug.Log("클리어~~!");
+                achieveClearItem=true;
+                speed=0;
                 other.gameObject.SetActive(false);
             }
         }
