@@ -7,10 +7,11 @@ TagManager:
   - Monster
   - Potion
   - ClearItem
-  tags:
+  - Background
   - Obstacle
   - Path
-  - Background
+  - Boundary
+  - Bullet
   layers:
   - Default
   - TransparentFX
