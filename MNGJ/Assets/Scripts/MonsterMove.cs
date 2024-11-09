@@ -11,20 +11,13 @@ public class MonsterMove : MonoBehaviour
     private int speed;
 
     [SerializeField]
-    private Sprite leftSprite;
+    private GameObject sight;
 
-    [SerializeField]
-    private Sprite rightSprite;
-
-    [SerializeField]
-    private Sprite frontSprite;
-
-    [SerializeField]
-    private Sprite backSprite;
+    public Vector2 direction;
+    public Vector3 targetPosition;
 
     private int curTarget = 0;
     private int moveType;
-    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {
@@ -34,46 +27,46 @@ public class MonsterMove : MonoBehaviour
     void Start()
     {
         moveType = points.Count;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         this.transform.position = points[curTarget].transform.position;
     }
 
     void Update()
     {
-        Vector3 targetPosition = points[curTarget].transform.position;
+        targetPosition = points[curTarget].transform.position;
 
         this.transform.position
             = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
         Vector3 change = targetPosition - transform.position;
-        
-        ChangeRotation(change);
 
-        ChangeSprite(change);
+        SetDirection(change);
 
         ChangeTarget();
     }
-    void ChangeRotation(Vector3 change)
-    {
-        float angle = Mathf.Atan2(change.y, change.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
 
-    void ChangeSprite(Vector3 change)
+    void SetDirection(Vector3 change)
     {
         if (Mathf.Abs(change.x) > Mathf.Abs(change.y))  // 좌우
         {
             if (change.x > 0)
-                spriteRenderer.sprite = rightSprite; 
+            {
+                direction = Vector2.right;
+            }
             else
-                spriteRenderer.sprite = leftSprite; 
+            {
+                direction = Vector2.left;
+            }
         }
         else  // 상하
         {
             if (change.y > 0)
-                spriteRenderer.sprite = frontSprite; 
+            {
+                direction = Vector2.up;
+            }               
             else
-                spriteRenderer.sprite = backSprite; 
+            {
+                direction = Vector2.down;
+            }
         }
     }
 
