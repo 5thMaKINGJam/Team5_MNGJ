@@ -8,6 +8,9 @@ public class MonsterMove : MonoBehaviour
     private List<GameObject> points;
 
     [SerializeField]
+    private GameObject player;
+
+    [SerializeField]
     private int speed;
 
     [SerializeField]
@@ -18,11 +21,8 @@ public class MonsterMove : MonoBehaviour
 
     private int curTarget = 0;
     private int moveType;
-
-    private void Awake()
-    {
-
-    }
+    private Vector3 originPosition = Vector3.up;
+    private bool followPlayer = false;
 
     void Start()
     {
@@ -32,7 +32,17 @@ public class MonsterMove : MonoBehaviour
 
     void Update()
     {
-        targetPosition = points[curTarget].transform.position;
+        // 원래 위치에 도달하면 플레이어 추격 종료
+        if (followPlayer) {
+            targetPosition = transform.position + new Vector3(direction.x, direction.y, 0) * 10f;
+        }
+        else if (originPosition != Vector3.up && Vector3.Distance(transform.position, originPosition) <= 0.1f)
+        {
+            originPosition = Vector3.up;
+            targetPosition = points[curTarget].transform.position;
+        }
+        else
+            targetPosition = points[curTarget].transform.position;
 
         this.transform.position
             = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
@@ -41,7 +51,8 @@ public class MonsterMove : MonoBehaviour
 
         SetDirection(change);
 
-        ChangeTarget();
+        if (!followPlayer)
+            ChangeTarget();
     }
 
     void SetDirection(Vector3 change)
@@ -49,24 +60,16 @@ public class MonsterMove : MonoBehaviour
         if (Mathf.Abs(change.x) > Mathf.Abs(change.y))  // 좌우
         {
             if (change.x > 0)
-            {
                 direction = Vector2.right;
-            }
             else
-            {
                 direction = Vector2.left;
-            }
         }
         else  // 상하
         {
             if (change.y > 0)
-            {
                 direction = Vector2.up;
-            }               
             else
-            {
                 direction = Vector2.down;
-            }
         }
     }
 
@@ -78,5 +81,20 @@ public class MonsterMove : MonoBehaviour
         {
             curTarget = (curTarget + 1) % moveType;
         }
+    }
+
+    public void FollowPlayer()
+    {
+        followPlayer = true;
+        Vector3 playerPosition = player.transform.position;
+        originPosition = transform.position;
+
+        targetPosition = transform.position + new Vector3(direction.x, direction.y, 0) * 10f; 
+    }
+
+    public void ReturnToOrigin()
+    {
+        followPlayer = false;
+        targetPosition = originPosition;
     }
 }

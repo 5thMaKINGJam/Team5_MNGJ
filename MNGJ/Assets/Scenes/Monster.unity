@@ -354,6 +354,7 @@ MonoBehaviour:
   - {fileID: 662164220}
   - {fileID: 1868934640}
   - {fileID: 2067398151}
+  player: {fileID: 1987595932}
   speed: 3
   sight: {fileID: 1736919340}
   direction: {x: 0, y: 0}
@@ -703,11 +704,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1239971382927122537, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.8003681
+      value: -2.75
       objectReference: {fileID: 0}
     - target: {fileID: 1239971382927122537, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.5979687
+      value: 0.34
       objectReference: {fileID: 0}
     - target: {fileID: 1239971382927122537, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
       propertyPath: m_LocalPosition.z
@@ -749,6 +750,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1239971382927122551, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
+      propertyPath: Hp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1239971382927122551, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
+      propertyPath: speed
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
 --- !u!1 &1736919340
@@ -762,6 +771,7 @@ GameObject:
   - component: {fileID: 1736919341}
   - component: {fileID: 1736919344}
   - component: {fileID: 1736919345}
+  - component: {fileID: 1736919346}
   m_Layer: 0
   m_Name: Sight
   m_TagString: Untagged
@@ -846,7 +856,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -902,6 +912,20 @@ PolygonCollider2D:
       - {x: 1.1899999, y: -0.39}
       - {x: 1.64, y: 0.049999997}
       - {x: 1.6899999, y: 0.099999994}
+--- !u!114 &1736919346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736919340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7600de05a17ef3743856b12e4ee8bbf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFollowTime: 4
+  followPlayer: 0
 --- !u!1 &1741473155
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,6 +1223,11 @@ Transform:
   m_Father: {fileID: 1217808131}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1987595932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1239971382927122548, guid: 6fabdf7acd7f662458ccb7c7669a8d72, type: 3}
+  m_PrefabInstance: {fileID: 1440350502}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2067398151
 GameObject:
   m_ObjectHideFlags: 0
