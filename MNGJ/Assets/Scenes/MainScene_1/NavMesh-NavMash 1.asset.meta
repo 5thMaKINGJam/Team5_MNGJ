@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:MNGJ/Assets/Scenes/MainScene_1/NavMesh-NavMash 1.asset.meta
 guid: ee82723b8ec8bbb47aafa9696959a822
+=======
+guid: ea4a1111b48e64c44a7e0bdb233f4137
+>>>>>>> Stashed changes:MNGJ/Assets/Scenes/Map_2/NavMesh-NavMash 1.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000
