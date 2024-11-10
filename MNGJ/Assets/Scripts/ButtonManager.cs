@@ -25,19 +25,22 @@ public class ButtonManager : MonoBehaviour
 
             case "GoSummer":
                 Debug.Log("여름 스테이지로");
-                //선택화면으로 이동하기
+                SceneManager.LoadScene("Map_2");
                 break;
 
             case "GoFall":
                 Debug.Log("가을 스테이지로");
-                //선택화면으로 이동하기
+                SceneManager.LoadScene("Map_3");
                 break;
 
             case "GoWinter":
                 Debug.Log("겨울 스테이지로");
-                //선택화면으로 이동하기
+                SceneManager.LoadScene("Map_4");
                 break;
-
+            case "GoEnding":
+                Debug.Log("엔딩 스테이지로");
+                SceneManager.LoadScene("Ending");
+                break;
             default:
                 Debug.Log("알 수 없는 버튼 클릭");
                 break;
