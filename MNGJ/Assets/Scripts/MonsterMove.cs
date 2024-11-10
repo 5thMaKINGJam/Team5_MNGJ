@@ -28,6 +28,22 @@ public class MonsterMove : MonoBehaviour
     private bool followPlayer = false;
     private Animator monsterAnim;
 
+    static float agentDrift = 0.001f; // 최소 드리프트 값
+
+    void SetDestination(Vector3 targetPosition)
+    {
+        // 현재 위치와 목표 위치의 X 좌표가 드리프트 값보다 작으면 드리프트 값 추가
+        if (Mathf.Abs(transform.position.x - targetPosition.x) < agentDrift)
+        {
+            var driftPos = targetPosition + new Vector3(agentDrift, 0f, 0f);
+            agent.SetDestination(driftPos); 
+        }
+        else
+        {
+            agent.SetDestination(targetPosition); 
+        }
+    }
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -56,7 +72,7 @@ public class MonsterMove : MonoBehaviour
         position.z = 1;
         transform.position = position;
 
-        agent.SetDestination(targetPosition);
+        SetDestination(targetPosition);
 
         Vector2 change = targetPosition - transform.position;
          
