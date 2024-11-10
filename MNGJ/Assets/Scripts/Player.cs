@@ -145,8 +145,8 @@ public class Player : MonoBehaviour
        Debug.Log("무적시간 끝");
    }
 
-        //상호작용 감지 함수
-    void OnTriggerStay2D(Collider2D other)
+    //상호작용 감지 함수
+    void OnTriggerEnter2D(Collider2D other)
     {
         // 원귀나 총알에 닿으면 체력 감소
         if (other.gameObject.CompareTag("Monster") || other.gameObject.CompareTag("Bullet"))
@@ -156,9 +156,12 @@ public class Player : MonoBehaviour
                 OnDamage();
             }
         }
+    }
 
-        //Hp 포션
-        if (other.gameObject.CompareTag("Potion")){
+        void OnTriggerStay2D(Collider2D other)
+        {
+            //Hp 포션
+            if (other.gameObject.CompareTag("Potion")){
             if (Input.GetKeyDown(KeyCode.Space)){
                 GetHp();
                 other.gameObject.SetActive(false);
