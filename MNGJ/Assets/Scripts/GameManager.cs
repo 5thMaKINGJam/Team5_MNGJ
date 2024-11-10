@@ -21,14 +21,8 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-        if(isFirst){
-                // 모든 스테이지 클리어 상태 초기화
-            for (int i = 0; i < isClear.Length; i++)
-            {
-                isClear[i] = false;
-            }
-            isClear[0]=true;
-        }
+        isClear[0]=true;
+        
     }
 
 }

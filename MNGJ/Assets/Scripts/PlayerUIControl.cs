@@ -43,12 +43,10 @@ public class PlayerUIControl : MonoBehaviour
         currentSceneName = SceneManager.GetActiveScene().name;
         
         if(currentSceneName == "Map_1")
-            GameManager.Instance.isClear[0] = true;
-        else if(currentSceneName == "Map_2")
             GameManager.Instance.isClear[1] = true;
-        else if(currentSceneName == "Map_3")
+        else if(currentSceneName == "Map_2")
             GameManager.Instance.isClear[2] = true;
-        else if(currentSceneName == "Map_4")
+        else if(currentSceneName == "Map_3")
             GameManager.Instance.isClear[3] = true;
 
         ClearUI.SetActive(true);
