@@ -12,6 +12,11 @@ public class StartUI : MonoBehaviour
     {
         switch (buttonName)
         {
+            case "TurnOff":
+                Debug.Log("게임 종료");
+                Application.Quit();
+                break;
+
             case "SelectStage":
                 Debug.Log("스테이지 선택 화면으로");
                 SceneManager.LoadScene("SelectStage");
