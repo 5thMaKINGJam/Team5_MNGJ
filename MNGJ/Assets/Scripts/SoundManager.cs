@@ -148,11 +148,18 @@ public class SoundManager : MonoBehaviour
         audioSfx.PlayOneShot(sfxs[(int)esfx]);
     }
 
-        public void StopSFX()
+    public void JustPlaySFX(ESfx esfx)
     {
-        audioSfx.Stop();
+        audioSfx.clip = sfxs[(int)esfx];
+        audioSfx.loop = true; // 효과음을 루프 재생
+        audioSfx.Play();
     }
 
+public void StopSFX()
+{
+    audioSfx.Stop(); // 효과음 정지
+    audioSfx.loop = false; // 루프 비활성화
+}
     //슬라이더를 통한 볼륨 조절
     public void SetAudioVolume(EAudioMixerType audioMixerType,float volume)
     {

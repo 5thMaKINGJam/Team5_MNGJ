@@ -8,20 +8,20 @@ public class PrologueManager : MonoBehaviour
 // Start is called before the first frame update
     void Start()
     {
-        if(GameManager.isFirst)
+        if(GameManager.Instance.isFirst)
             StartCoroutine(FirstTime());
     }
 
-   IEnumerator FirstTime()
-{
-    // 프롤로그 UI 활성화
-    prologue.SetActive(true);
-    Debug.Log("Press any key to continue...");
+    IEnumerator FirstTime()
+    {
+        // 프롤로그 UI 활성화
+        prologue.SetActive(true);
+        Debug.Log("Press any key to continue...");
 
-    // 아무 키나 누를 때까지 대기
-    yield return new WaitUntil(() => Input.anyKeyDown);
+        // 아무 키나 누를 때까지 대기
+        yield return new WaitUntil(() => Input.anyKeyDown);
 
-    prologue.SetActive(false);
-}
+        prologue.SetActive(false);
+    }
 
 }

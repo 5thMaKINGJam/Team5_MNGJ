@@ -27,8 +27,7 @@ public class TypingEffect : MonoBehaviour
     private float typingSpeed = 0.1f;   // 타이핑 속도
     private float soundCooldown = 0.8f; // 효과음 재생 간격
     private float soundTimer = 0f;
-    private bool isTyping = true;
-
+    bool isEnd=false;
     void Start()
     {
         text = targetText.text.ToString();
@@ -36,6 +35,7 @@ public class TypingEffect : MonoBehaviour
         SoundManager.instance.PlaySFX(SoundManager.ESfx.TYPING_EFFECT);
         StartCoroutine(TypingCoroutine());
     }
+    
 
     IEnumerator TypingCoroutine()
     {
@@ -43,13 +43,9 @@ public class TypingEffect : MonoBehaviour
 
         while (count < text.Length)
         {
-            // 키 입력이 감지되면 타이핑 중지
-            if (Input.anyKeyDown)
-            {
-                StopTypingSound();
-                yield break;
-            }
-
+        if(Input.anyKeyDown){
+            break;
+        }
             // 한 글자씩 출력
             targetText.text += text[count];
             count++;
@@ -59,20 +55,10 @@ public class TypingEffect : MonoBehaviour
             if (soundTimer >= soundCooldown)
             {
                 SoundManager.instance.PlaySFX(SoundManager.ESfx.TYPING_EFFECT);
-                soundTimer = 0f;
+                soundTimer = 0f; // 타이머 초기화
+                Debug.Log(soundTimer);
             }
-
             yield return new WaitForSeconds(typingSpeed);
         }
-
-        // 타이핑이 끝났을 때도 효과음 멈춤
-        StopTypingSound();
-    }
-
-    // 효과음 정지 메서드
-    void StopTypingSound()
-    {
-        isTyping = false;
-        SoundManager.instance.StopSFX();
     }
 }

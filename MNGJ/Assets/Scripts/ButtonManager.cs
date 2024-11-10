@@ -11,7 +11,11 @@ public class ButtonManager : MonoBehaviour
             case "BackToStart":
                 SceneManager.LoadScene("Start");
                 break;
-                
+
+            case "SelectStage":
+                SceneManager.LoadScene("SelectStage");
+                break;
+
             case "Restart":
                 Debug.Log("게임 오버");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
