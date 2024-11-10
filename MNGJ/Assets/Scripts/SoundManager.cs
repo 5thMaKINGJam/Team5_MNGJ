@@ -33,7 +33,8 @@ public class SoundManager : MonoBehaviour
         CLEAR_EFFECT,
         DETECTED_EFFECT,
         DAMAGE_EFFECT,
-        GAMEOVER_EFFECT
+        GAMEOVER_EFFECT,
+        TYPING_EFFECT
     }
 
     public enum EAudioMixerType{BGM,SFX}
