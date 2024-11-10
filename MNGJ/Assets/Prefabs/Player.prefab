@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inGameUI: {fileID: 0}
-  speed: 20
+  speed: 10
   Hp: 3
   InvincibilityTime: 2
   achieveClearItem: 0

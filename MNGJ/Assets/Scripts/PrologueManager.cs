@@ -8,8 +8,14 @@ public class PrologueManager : MonoBehaviour
 // Start is called before the first frame update
     void Start()
     {
-        if(GameManager.Instance.isFirst)
+        if(!PlayerPrefs.HasKey("First"))
+        {
             StartCoroutine(FirstTime());
+        }
+        else
+        {
+            PlayerPrefs.SetInt("First", 1);
+        }
     }
 
     IEnumerator FirstTime()
