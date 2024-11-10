@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
       // 싱글톤 인스턴스
     public static GameManager Instance { get; private set; }
 
-    public static bool isFirst=true; //프롤로그 나올까 말까
+    public bool isFirst=true; //프롤로그 나올까 말까
     public bool [] isClear=new bool[4]; //클리어 했나용??
 
     private void Awake()
