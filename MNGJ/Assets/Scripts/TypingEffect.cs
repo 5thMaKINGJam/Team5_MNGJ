@@ -24,10 +24,11 @@ public class TypingEffect : MonoBehaviour
     원혼을 달래기 위해 조선에서 제일 가는 도사, 
     바로 당신에게 도움을 청하는데..";
 
-    private float typingSpeed = 0.1f;   // 타이핑 속도
-    private float soundCooldown = 0.8f; // 효과음 재생 간격
+    private float typingSpeed = 0.1f;
+    private float soundCooldown = 0.8f;
     private float soundTimer = 0f;
-    bool isEnd=false;
+    private bool isTyping = true;
+
     void Start()
     {
         text = targetText.text.ToString();
@@ -35,29 +36,31 @@ public class TypingEffect : MonoBehaviour
         SoundManager.instance.PlaySFX(SoundManager.ESfx.TYPING_EFFECT);
         StartCoroutine(TypingCoroutine());
     }
-    
 
     IEnumerator TypingCoroutine()
     {
         int count = 0;
 
-        while (count < text.Length)
+        while (count < text.Length && isTyping)
         {
-        if(Input.anyKeyDown){
-            break;
-        }
-            // 한 글자씩 출력
+            if (Input.anyKeyDown)
+            {
+                isTyping = false;
+                SoundManager.instance.StopSFX();  // 인수 없이 호출
+                targetText.text = text;  // 전체 텍스트 출력
+                yield break;
+            }
+
             targetText.text += text[count];
             count++;
 
-            // 효과음 재생
             soundTimer += Time.deltaTime;
             if (soundTimer >= soundCooldown)
             {
                 SoundManager.instance.PlaySFX(SoundManager.ESfx.TYPING_EFFECT);
-                soundTimer = 0f; // 타이머 초기화
-                Debug.Log(soundTimer);
+                soundTimer = 0f;
             }
+
             yield return new WaitForSeconds(typingSpeed);
         }
     }
