@@ -21,7 +21,9 @@ public class SoundManager : MonoBehaviour
         FALL_BGM,
         WINTER_BGM,
         DETECTED_BGM,
-        GAMEOVER_BGM
+        GAMEOVER_BGM,
+        ENDING_BGM,
+        PROLOGUE_BGM
     }
 
     // SFX 종류들
@@ -91,8 +93,10 @@ public class SoundManager : MonoBehaviour
         switch (currentSceneName)
         {
             case "Start":
-            case "SelectStage":
                 newBgm = EBgm.MAIN_BGM; // 메인 메뉴 BGM
+                break;
+            case "SelectStage":
+                newBgm = EBgm.PROLOGUE_BGM; // 프롤로그 BGM
                 break;
             case "Map_1":
                 newBgm = EBgm.SPRING_BGM; // 봄 씬 BGM
@@ -105,6 +109,9 @@ public class SoundManager : MonoBehaviour
                 break;
             case "Map_4":
                 newBgm = EBgm.WINTER_BGM; // 겨울 씬 BGM
+                break;
+            case "Ending":
+                newBgm=EBgm.ENDING_BGM; //엔딩 BGM
                 break;
             default:
                 newBgm = EBgm.MAIN_BGM; // 기본 BGM
@@ -141,6 +148,10 @@ public class SoundManager : MonoBehaviour
         audioSfx.PlayOneShot(sfxs[(int)esfx]);
     }
 
+        public void StopSFX()
+    {
+        audioSfx.Stop();
+    }
 
     //슬라이더를 통한 볼륨 조절
     public void SetAudioVolume(EAudioMixerType audioMixerType,float volume)
