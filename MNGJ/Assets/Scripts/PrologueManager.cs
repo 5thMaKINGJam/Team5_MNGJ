@@ -12,10 +12,6 @@ public class PrologueManager : MonoBehaviour
         {
             StartCoroutine(FirstTime());
         }
-        else
-        {
-            PlayerPrefs.SetInt("First", 1);
-        }
     }
 
     IEnumerator FirstTime()
@@ -27,6 +23,7 @@ public class PrologueManager : MonoBehaviour
         // 아무 키나 누를 때까지 대기
         yield return new WaitUntil(() => Input.anyKeyDown);
 
+        PlayerPrefs.SetInt("First", 1);
         prologue.SetActive(false);
     }
 
